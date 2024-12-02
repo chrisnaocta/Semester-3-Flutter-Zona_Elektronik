@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart'; // Import package intl
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final String productName;
@@ -20,6 +21,8 @@ class ProductDetailPage extends StatelessWidget {
 
   // Fungsi untuk melakukan pembelian produk dan menyimpan ke database
   Future<void> _buyProduct(BuildContext context) async {
+    final SharedPreferences session = await SharedPreferences.getInstance();
+    String? email = session.getString('email'); // Ambil email dari session
     // Tampilkan pesan loading
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -39,6 +42,7 @@ class ProductDetailPage extends StatelessWidget {
           'id_produk': productId,
           'harga_produk': cleanedPrice,
           'quantity': '1',
+          'email': email,
         },
       );
 
@@ -51,6 +55,7 @@ class ProductDetailPage extends StatelessWidget {
         print(productName);
         print(cleanedPrice);
         print(productId);
+        print(email);
         var responseData = json.decode(response.body);
         if (responseData['value'] == 1) {
           // Tampilkan pesan sukses jika pembelian berhasil
