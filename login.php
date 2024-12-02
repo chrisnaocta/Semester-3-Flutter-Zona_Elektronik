@@ -33,9 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
             //Jika password cocok login berhasil
             $response['value'] = 1;
             $response['message'] = "Login Berhasil";
-
-            // Store user ID in session
-            $_SESSION['user_id'] = $row['id']; // Assuming 'id' is the primary key for users
         }else{
             //Jika password tidak cocok
             $response['value'] = 0;

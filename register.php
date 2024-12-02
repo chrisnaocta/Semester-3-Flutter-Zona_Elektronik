@@ -12,9 +12,9 @@ function generateCustomId($connect) {
     $prefix = 'USR-';
     
     // Cari nomor urut terakhir hari ini
-    $stmt = $connect->prepare("SELECT MAX(SUBSTRING(id, -4)) as max_urut 
+    $stmt = $connect->prepare("SELECT MAX(SUBSTRING(id_user, -4)) as max_urut 
                                 FROM users 
-                                WHERE id LIKE ?");
+                                WHERE id_user LIKE ?");
     $like_pattern = $prefix . '%';
     $stmt->bind_param("s", $like_pattern);
     $stmt->execute();
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         // Menggunakan prepared statement untuk menghindari SQL injection
         // Menambahkan field 'createdDate' dengan nilai default dari fungsi NOW() MySQL
-        $stmt = $connect->prepare("INSERT INTO users (id, email, password, nama, alamat, telepon, foto, createdDate) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt = $connect->prepare("INSERT INTO users (id_user, email, password, nama, alamat, telepon, foto, createdDate) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
         $stmt->bind_param("sssssss", $custom_id,$email, $hashed_password, $nama, $alamat, $telepon, $fotoFileName); // "s" = string
 
          // Menjalankan query
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     // Pindahkan file ke folder uploads
                     if (move_uploaded_file($fileTmp, $uploadPath)) {
                         // Update database dengan nama file foto
-                        $stmt = $connect->prepare("UPDATE users SET foto = ? WHERE id = ?");
+                        $stmt = $connect->prepare("UPDATE users SET foto = ? WHERE id_user = ?");
                         $stmt->bind_param("ss", $fotoFileName, $custom_id);
                         $stmt->execute();
                     } else {
