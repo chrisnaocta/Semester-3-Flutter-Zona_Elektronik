@@ -44,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $harga_produk = $_POST['harga_produk'] ?? null;
     $quantity = $_POST['quantity'] ?? 1;
     $tanggal = date('Y-m-d');
+    $email = $_POST['email'] ?? null;
+    error_log('email pembeli:' . $email);
 
     // Cek apakah field harga_produk dan id_produk terisi
     if (!empty($harga_produk) && !empty($id_produk)) {
@@ -53,24 +55,41 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Generate custom ID
         $custom_id = generateCustomId($connect);
 
-        // Menggunakan prepared statement 
-        $stmt = $connect->prepare("INSERT INTO jual (idjual, tgljual, idproduct, price, quantity) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssdi", $custom_id, $tanggal, $id_produk, $harga_produk, $quantity);
-        // 's' = string, 'd' = double
+        // Mengambil id berdasarkan email dari tabel users
+        $stmt1 = $connect->prepare("SELECT id_user FROM users WHERE email = ?");
+        $stmt1->bind_param("s", $email);
+        $stmt1->execute();
+        $result = $stmt1->get_result();
+        
+        if ($row = $result->fetch_assoc()) {
+            $id_pembeli = $row['id_user'];
 
-        // Menjalankan query
-        if ($stmt->execute()) {
-            // Jika penyimpanan berhasil
-            $response['value'] = 1;
-            $response['message'] = 'Pembelian berhasil diproses';
-            $response['idjual'] = $custom_id; // Tambahkan ID yang baru dibuat
+            // Menggunakan prepared statement 
+            $stmt = $connect->prepare("INSERT INTO jual (idjual, tgljual, idproduct, price, quantity, id_pembeli) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssdis", $custom_id, $tanggal, $id_produk, $harga_produk, $quantity, $id_pembeli);
+            // 's' = string, 'd' = double, 'i' = integer
+
+            // Menjalankan query
+            if ($stmt->execute()) {
+                // Jika penyimpanan berhasil
+                $response['value'] = 1;
+                $response['message'] = 'Pembelian berhasil diproses';
+                $response['idjual'] = $custom_id; // Tambahkan ID yang baru dibuat
+            } else {
+                // Jika terjadi kesalahan saat menyimpan
+                $response['value'] = 0;
+                $response['message'] = 'Gagal saat menyimpan data: ' . $stmt->error;
+            }
+
+            // Tutup statement
+            $stmt->close();
         } else {
-            // Jika terjadi kesalahan saat menyimpan
             $response['value'] = 0;
-            $response['message'] = 'Gagal saat menyimpan data:' . $stmt->error;
+            $response['message'] = 'User tidak ditemukan';
         }
 
-        $stmt->close(); // Menutup statement
+        // Tutup statement pencarian user
+        $stmt1->close();
     } else {
         // Jika field harga_produk atau id_produk kosong
         $response['value'] = 0;
@@ -80,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Mengembalikan respons dalam format JSON
     echo json_encode($response);
 } else {
-    // Jika request method bukan POSt
+    // Jika request method bukan POST
     $response['value'] = 0;
     $response['message'] = 'Permintaan tidak valid.';
     echo json_encode($response);
