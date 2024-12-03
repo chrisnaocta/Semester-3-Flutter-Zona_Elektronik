@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             exit(); 
         }
         // Mengecek apakah email sudah dipakai
-        $stmt = $connect->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt = $connect->prepare("SELECT id_user FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         if (!$stmt->execute()) {
             $response['value'] = 0;
@@ -34,10 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo json_encode($response);
             exit(); 
         }
-        $stmt->bind_result($id);
+        $stmt->bind_result($id_user);
         $stmt->fetch();
         $stmt->close();
-        if (!$id) {
+        if (!$id_user) {
             $response['value'] = 0;
             $response['message'] = 'Akun tidak ditemukan';
 
@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Hashing password sebelum menyimpan
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
-        $stmt = $connect->prepare("UPDATE users SET password = ? WHERE id = ?");
-        $stmt->bind_param("ss", $hashed_password, $id);
+        $stmt = $connect->prepare("UPDATE users SET password = ? WHERE id_user = ?");
+        $stmt->bind_param("ss", $hashed_password, $id_user);
         if (!$stmt->execute()) {
             $response['value'] = 0;
             $response['message'] = 'Gagal mencari akun: ' . $stmt->error;
