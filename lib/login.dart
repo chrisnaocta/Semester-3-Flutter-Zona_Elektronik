@@ -110,13 +110,10 @@ class _LoginPageState extends State<LoginPage> {
                   // Yellow (255, 255, 158, 1)
                   // Orange (255, 255, 115, 18)
                   // Red (255, 255, 68, 18)
-                  const Color.fromARGB(255, 255, 183, 22),
                   Colors.white,
                   Colors.white,
-                  Colors.white,
-                  const Color.fromARGB(255, 255, 72, 40),
                 ],
-                stops: [0.15, 0.15, 0.15, 0.90, 0.90],
+                stops: [0, 1],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -134,13 +131,11 @@ class _LoginPageState extends State<LoginPage> {
                     height: 28,
                   ),
                   // Logo berbentuk lingkaran
-                  CircleAvatar(
-                    radius: 100,
-                    backgroundImage:
-                        AssetImage('assets/images/zona_elektronik.png'),
+                  SizedBox(
+                    width: 300,
+                    height: 200,
+                    child: Image.asset('assets/images/zona_elektronik.png'),
                   ),
-
-                  // TextField email dengan desain kapsul dan ikon email
                   SizedBox(
                     width: 320,
                     child: TextField(
