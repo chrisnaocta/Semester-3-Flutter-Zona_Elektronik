@@ -106,10 +106,6 @@ class _LoginPageState extends State<LoginPage> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  // Warna logo:
-                  // Yellow (255, 255, 158, 1)
-                  // Orange (255, 255, 115, 18)
-                  // Red (255, 255, 68, 18)
                   Colors.white,
                   Colors.white,
                 ],
@@ -213,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 10, 34, 166),
+                            backgroundColor: Color.fromARGB(255, 19, 42, 166),
                             foregroundColor: Colors.white,
                             elevation: 3,
                           ),

@@ -142,13 +142,15 @@ class _DashboardPageState extends State<DashboardPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Zona Elektronik', 
-        style: TextStyle(
-          fontSize: 24
-        ),),
+        title: SizedBox(
+          height: 80,
+          child: Image.asset("assets/images/zona_elektronik2.png"),
+        ),
         backgroundColor: Color.fromARGB(255, 252, 252, 255),
-        foregroundColor: Colors.black,
+        foregroundColor: Color.fromARGB(255, 19, 42, 166),
         toolbarHeight: 80,
+        scrolledUnderElevation: 0,
+        
         actions: [
           IconButton(icon: Icon(Icons.logout), onPressed: _logout),
         ],
@@ -159,7 +161,7 @@ class _DashboardPageState extends State<DashboardPage> {
           children: [
             UserAccountsDrawerHeader(              
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 4, 28, 162),
+                color: Color.fromARGB(255, 19, 42, 166),
                 
               ),
               accountName: Text(
@@ -185,33 +187,51 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart),
+              leading: Icon(Icons.shopping_cart,
+              color: Color.fromARGB(255, 19, 42, 166),),
               title: Text(
                 'Keranjang Belanja',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 19, 42, 166)
+                )
               ),
               onTap: () {
                 // Tambahkan logika untuk navigasi ke halaman keranjang belanja
               },
             ),
             ListTile(
-              leading: Icon(Icons.history),
+              leading: Icon(Icons.history,
+              color: Color.fromARGB(255, 19, 42, 166),),
               title: Text(
                 'Riwayat Belanja',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 19, 42, 166)
+                )
               ),
               onTap: () {
                 // Tambahkan logika untuk navigasi ke halaman riwayat belanja
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Setting'),
+              leading: Icon(Icons.settings,
+              color: Color.fromARGB(255, 19, 42, 166),),
+              title: Text('Settings',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 19, 42, 166)
+                )
+              ),
               onTap: () {
                 // Tambahkan logika untuk navigasi ke halaman pengaturan
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              leading: Icon(Icons.logout,
+              color: Color.fromARGB(255, 19, 42, 166),),
+              title: Text('Logout',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 19, 42, 166)
+                )
+              ),
               onTap: () {
                 _logout();
               },
@@ -241,14 +261,6 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                ' Selamat Berbelanja',
-                style: TextStyle(
-                  fontSize: 24, 
-                  fontWeight: FontWeight.normal
-                  ),
-              ),
-              SizedBox(height: 16),
               Expanded(
                 child: isLoading
                     ? Center(child: CircularProgressIndicator())
@@ -346,7 +358,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                               style: ElevatedButton.styleFrom(
                                                 minimumSize: Size(double.infinity, 36),
                                                 elevation: 0,
-                                                backgroundColor: Color.fromARGB(255, 10, 34, 166),
+                                                backgroundColor: Color.fromARGB(255, 19, 42, 166),
                                                 foregroundColor: Colors.white
                                               ),
                                             ),

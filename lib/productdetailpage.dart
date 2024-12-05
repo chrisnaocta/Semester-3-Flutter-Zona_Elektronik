@@ -184,7 +184,7 @@ class ProductDetailPage extends StatelessWidget {
                   child: Text('Beli Sekarang'),
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 36),
-                    backgroundColor: Color.fromARGB(255, 10, 34, 166),
+                    backgroundColor: Color.fromARGB(255, 4, 28, 162),
                     foregroundColor: Colors.white,
                   ),
                 ),
