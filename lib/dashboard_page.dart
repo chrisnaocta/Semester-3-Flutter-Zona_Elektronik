@@ -143,7 +143,6 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       appBar: AppBar(
         title: SizedBox(
-          height: 80,
           child: Image.asset("assets/images/zona_elektronik2.png"),
         ),
         backgroundColor: Color.fromARGB(255, 252, 252, 255),
@@ -187,10 +186,10 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart,
+              leading: Icon(Icons.dynamic_form,
               color: Color.fromARGB(255, 19, 42, 166),),
               title: Text(
-                'Keranjang Belanja',
+                'Pesanan',
                 style: TextStyle(
                   color: Color.fromARGB(255, 19, 42, 166)
                 )
