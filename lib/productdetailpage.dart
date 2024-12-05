@@ -107,66 +107,91 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Memformat harga produk menggunakan fungsi formatCurrency
     String formattedPrice = formatCurrency(productPrice);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(productName),
+        backgroundColor: Color.fromARGB(255, 252, 252, 255),
+        foregroundColor: Colors.black,
+        toolbarHeight: 80,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: Image.network(
-                  productImage,
-                  height: 250,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(
-                      Icons.error,
-                      size: 100,
-                      color: Colors.red,
-                    );
-                  },
-                ),
+        child: Stack(
+          children: [
+            Container(
+            width: screenWidth,
+            height: screenHeight,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(255, 246, 246, 255),
+                ],
+                stops: [0, 1],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              SizedBox(height: 20),
-              Text(
-                productName,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 10),
-              // Menampilkan harga yang sudah diformat
-              Text(
-                formattedPrice,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.green,
-                ),
-              ),
-              SizedBox(height: 20),
-              Text(
-                productDescription,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                ),
-              ),
-              SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () => _buyProduct(context),
-                child: Text('Beli Sekarang'),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 36),
-                ),
-              ),
-            ],
+            ),
           ),
+            Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: Image.network(
+                    productImage,
+                    height: 250,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Icon(
+                        Icons.error,
+                        size: 100,
+                        color: Colors.red,
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  productName,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  productDescription,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black54,
+                  ),
+                ),
+                SizedBox(height: 28),
+                // Menampilkan harga yang sudah diformat
+                Text(
+                  formattedPrice,
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: const Color.fromARGB(255, 0, 160, 5),
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => _buyProduct(context),
+                  child: Text('Beli Sekarang'),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 36),
+                    backgroundColor: Color.fromARGB(255, 10, 34, 166),
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ]
         ),
       ),
     );

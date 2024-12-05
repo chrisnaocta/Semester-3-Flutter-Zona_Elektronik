@@ -137,20 +137,46 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard Produk'),
+        title: Text('Zona Elektronik', 
+        style: TextStyle(
+          fontSize: 24
+        ),),
+        backgroundColor: Color.fromARGB(255, 252, 252, 255),
+        foregroundColor: Colors.black,
+        toolbarHeight: 80,
         actions: [
           IconButton(icon: Icon(Icons.logout), onPressed: _logout),
         ],
       ),
       drawer: Drawer(
+        backgroundColor: Colors.white,
         child: Column(
           children: [
-            UserAccountsDrawerHeader(
-              accountName: Text(userName), // Nama pengguna
-              accountEmail: Text(userEmail), // Email pengguna
+            UserAccountsDrawerHeader(              
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 4, 28, 162),
+                
+              ),
+              accountName: Text(
+                userName,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),  
+              ), // Nama pengguna
+              accountEmail: Text(
+                userEmail,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                ), // Email pengguna
               currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
                 backgroundImage: NetworkImage(
                   'http://10.0.2.2/Zona_Elektronik/uploads/$userProfilePhoto', // Ganti dengan URL foto pengguna
                 ),
@@ -160,14 +186,18 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             ListTile(
               leading: Icon(Icons.shopping_cart),
-              title: Text('Keranjang Belanja'),
+              title: Text(
+                'Keranjang Belanja',
+              ),
               onTap: () {
                 // Tambahkan logika untuk navigasi ke halaman keranjang belanja
               },
             ),
             ListTile(
               leading: Icon(Icons.history),
-              title: Text('Riwayat Belanja'),
+              title: Text(
+                'Riwayat Belanja',
+              ),
               onTap: () {
                 // Tambahkan logika untuk navigasi ke halaman riwayat belanja
               },
@@ -189,124 +219,151 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Selamat Berbelanja',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: Stack(
+        children: [
+          Container(
+            width: screenWidth,
+            height: screenHeight,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 246, 246, 255),
+                  Color.fromARGB(255, 246, 246, 255),
+                ],
+                stops: [0, 1],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
-            SizedBox(height: 50),
-            Expanded(
-              child: isLoading
-                  ? Center(child: CircularProgressIndicator())
-                  : errorMessage.isNotEmpty
-                      ? Center(
-                          child: Text(errorMessage)) // Menampilkan pesan error
-                      : GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 0.75,
-                          ),
-                          itemCount: products.length,
-                          itemBuilder: (context, index) {
-                            final product = products[index];
-                            return Card(
-                              elevation: 4,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(10),
-                                      ),
-                                      child: Image.network(
-                                        product['image'],
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Icon(
-                                            Icons.error,
-                                            size: 100,
-                                            color: Colors.red,
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          product['product'],
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+          ),
+          Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                ' Selamat Berbelanja',
+                style: TextStyle(
+                  fontSize: 24, 
+                  fontWeight: FontWeight.normal
+                  ),
+              ),
+              SizedBox(height: 16),
+              Expanded(
+                child: isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : errorMessage.isNotEmpty
+                        ? Center(
+                            child: Text(errorMessage)) // Menampilkan pesan error
+                        : GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                              childAspectRatio: 0.75,
+                            ),
+                            itemCount: products.length,
+                            itemBuilder: (context, index) {
+                              final product = products[index];
+                              return Card(
+                                color: Colors.white,
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                                    children: [
+                                      Expanded(
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(10),
+                                          ),
+                                          child: Image.network(
+                                            product['image'],
+                                            fit: BoxFit.contain,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Icon(
+                                                Icons.error,
+                                                size: 100,
+                                                color: const Color.fromARGB(255, 175, 33, 23),
+                                              );
+                                            },
                                           ),
                                         ),
-                                        SizedBox(height: 4),
-                                        // Gunakan format angka untuk harga
-                                        Text(
-                                          formatCurrency(product['price']),
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                        SizedBox(height: 8),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProductDetailPage(
-                                                  productName:
-                                                      product['product'] ??
-                                                          'Unknown Product',
-                                                  productPrice: formatCurrency(
-                                                      product['price'] ?? '0'),
-                                                  productImage:
-                                                      product['image'] ?? '',
-                                                  productDescription:
-                                                      product['description'] ??
-                                                          'No description',
-                                                  productId:
-                                                      product['idproduct'] ??
-                                                          '0',
-                                                ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              product['product'],
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                            );
-                                          },
-                                          child: Text('Beli'),
-                                          style: ElevatedButton.styleFrom(
-                                            minimumSize:
-                                                Size(double.infinity, 36),
-                                          ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            // Gunakan format angka untuk harga
+                                            Text(
+                                              formatCurrency(product['price']),
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                            SizedBox(height: 8),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProductDetailPage(
+                                                      productName:
+                                                          product['product'] ??
+                                                              'Unknown Product',
+                                                      productPrice: formatCurrency(
+                                                          product['price'] ?? '0'),
+                                                      productImage:
+                                                          product['image'] ?? '',
+                                                      productDescription:
+                                                          product['description'] ??
+                                                              'No description',
+                                                      productId:
+                                                          product['idproduct'] ??
+                                                              '0',
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text('Beli'),
+                                              style: ElevatedButton.styleFrom(
+                                                minimumSize: Size(double.infinity, 36),
+                                                elevation: 0,
+                                                backgroundColor: Color.fromARGB(255, 10, 34, 166),
+                                                foregroundColor: Colors.white
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-            ),
-          ],
+                                ),
+                              );
+                            },
+                          ),
+              ),
+            ],
+          ),
         ),
+        ]
       ),
     );
   }
