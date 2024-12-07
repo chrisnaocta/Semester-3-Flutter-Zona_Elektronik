@@ -45,16 +45,29 @@ $email = mysqli_real_escape_string($connect, $input['email']);
 error_log('Email yang diterima: ' . $email);
 
 // Query untuk mengambil data pengguna berdasarkan email
-$query = "SELECT id_user, email, nama, alamat, telepon, foto FROM users WHERE email = '$email'";
+$query = "SELECT id_user FROM users WHERE email = '$email'";
 $result = mysqli_query($connect, $query);
 
 if ($result) {
     if (mysqli_num_rows($result) > 0) {
         // Pengguna ditemukan
         $user = mysqli_fetch_assoc($result);
+
+        $id_user = $user['id_user'];
+
+        // Query untuk mengambil data pesanan pengguna
+        $query = "SELECT * FROM jual WHERE (id_pembeli = '$id_user' AND order_status = 'Waiting')";
+        $result = mysqli_query($connect, $query);
+
+        $pesanan = array();
+
+        while ($row = mysqli_fetch_assoc($result)){
+            $pesanan[] = $row;
+        }
+
         $response = [
             'status' => 'success', 
-            'data' => $user
+            'data' => $pesanan,
         ];
         http_response_code(200);
     } else {

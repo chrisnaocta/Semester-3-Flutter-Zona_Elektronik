@@ -28,33 +28,33 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $rawInput = file_get_contents('php://input');
 $input = json_decode($rawInput, true);
 
-// Periksa apakah email ada di input
-if (!isset($input['email'])) {
+// Periksa apakah idproduct ada di input
+if (!isset($input['idproduct'])) {
     http_response_code(400); // Bad Request
     echo json_encode([
         'status' => 'error', 
-        'message' => 'Email tidak diberikan'
+        'message' => 'ID product tidak diberikan'
     ]);
     exit();
 }
 
-// Ambil dan sanitasi email
-$email = mysqli_real_escape_string($connect, $input['email']);
+// Ambil dan sanitasi idproduct
+$idproduct = mysqli_real_escape_string($connect, $input['idproduct']);
 
 // Log untuk debugging
-error_log('Email yang diterima: ' . $email);
+error_log('idproduct yang diterima: ' . $idproduct);
 
-// Query untuk mengambil data pengguna berdasarkan email
-$query = "SELECT id_user, email, nama, alamat, telepon, foto FROM users WHERE email = '$email'";
+// Query untuk mengambil data pengguna berdasarkan idproduct
+$query = "SELECT * FROM namaproduct WHERE idproduct = '$idproduct'";
 $result = mysqli_query($connect, $query);
 
 if ($result) {
     if (mysqli_num_rows($result) > 0) {
         // Pengguna ditemukan
-        $user = mysqli_fetch_assoc($result);
+        $product = mysqli_fetch_assoc($result);
         $response = [
             'status' => 'success', 
-            'data' => $user
+            'data' => $product
         ];
         http_response_code(200);
     } else {
