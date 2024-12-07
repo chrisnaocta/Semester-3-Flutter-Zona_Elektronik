@@ -149,10 +149,6 @@ class _DashboardPageState extends State<DashboardPage> {
         foregroundColor: Color.fromARGB(255, 19, 42, 166),
         toolbarHeight: 80,
         scrolledUnderElevation: 0,
-        
-        actions: [
-          IconButton(icon: Icon(Icons.logout), onPressed: _logout),
-        ],
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
@@ -186,7 +182,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.dynamic_form,
+              leading: Icon(Icons.shopping_cart,
               color: Color.fromARGB(255, 19, 42, 166),),
               title: Text(
                 'Pesanan',

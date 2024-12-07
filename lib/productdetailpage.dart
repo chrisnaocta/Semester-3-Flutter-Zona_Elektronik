@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart'; // Import package intl
 import 'package:shared_preferences/shared_preferences.dart';
+import 'pesan.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final String productName;
@@ -113,8 +114,9 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 252, 252, 255),
-        foregroundColor: Colors.black,
+        foregroundColor: Color.fromARGB(255, 19, 42, 166),
         toolbarHeight: 80,
+        scrolledUnderElevation: 0,
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -180,7 +182,25 @@ class ProductDetailPage extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => _buyProduct(context),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PesanPage(
+                          productName:
+                              productName,
+                          productPrice:
+                              productPrice,
+                          productImage:
+                              productImage,
+                          productDescription:
+                              productDescription,
+                          productId:
+                              productId,
+                        ),
+                      ),
+                    );},
                   child: Text('Beli Sekarang'),
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 36),
