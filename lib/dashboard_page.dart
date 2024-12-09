@@ -5,6 +5,9 @@ import 'package:intl/intl.dart'; // Impor intl untuk memformat angka
 import 'login.dart'; // Impor halaman login
 import 'productdetailpage.dart'; // Impor halaman ProductDetailPage
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zona_elektronik/dashboard_page.dart';
+import 'package:zona_elektronik/riwayat.dart';
+import 'package:zona_elektronik/pesanan.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -182,37 +185,51 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart,
-              color: Color.fromARGB(255, 19, 42, 166),),
+              leading: Icon(Icons.home),
+              title: Text(
+                'Home',
+                style: TextStyle(
+                )
+              ),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => DashboardPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_cart,),
               title: Text(
                 'Pesanan',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 19, 42, 166)
                 )
               ),
               onTap: () {
-                // Tambahkan logika untuk navigasi ke halaman keranjang belanja
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => PesananPage(email: userEmail)),
+                );
               },
             ),
             ListTile(
-              leading: Icon(Icons.history,
-              color: Color.fromARGB(255, 19, 42, 166),),
+              leading: Icon(Icons.history,),
               title: Text(
-                'Riwayat Belanja',
+                'Riwayat Pesanan',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 19, 42, 166)
                 )
               ),
               onTap: () {
-                // Tambahkan logika untuk navigasi ke halaman riwayat belanja
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => RiwayatPage(email: userEmail)),
+                );
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings,
-              color: Color.fromARGB(255, 19, 42, 166),),
+              leading: Icon(Icons.settings,),
               title: Text('Settings',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 19, 42, 166)
                 )
               ),
               onTap: () {
@@ -220,11 +237,9 @@ class _DashboardPageState extends State<DashboardPage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout,
-              color: Color.fromARGB(255, 19, 42, 166),),
+              leading: Icon(Icons.logout,),
               title: Text('Logout',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 19, 42, 166)
                 )
               ),
               onTap: () {

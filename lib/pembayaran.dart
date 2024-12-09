@@ -40,6 +40,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
   String userTelepon = 'Loading...';
   bool isLoading = true; // Menyimpan status loading
   String errorMessage = ''; // Menyimpan pesan error jika ada
+  bool uploaded = false;
 
   // Fungsi untuk memilih gambar
   Future<void> _pickImage() async {
@@ -52,6 +53,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
     if (pickedFile != null) {
       setState(() {
         _imageFile = File(pickedFile.path);
+        uploaded = true;
       });
     }
   }
@@ -229,6 +231,12 @@ class _PembayaranPageState extends State<PembayaranPage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
+    var uploadedText = Text("");
+
+    if (uploaded) {
+      uploadedText = Text("Uploaded");
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -280,6 +288,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
                                       style: TextStyle(
                                       color: Color.fromARGB(200, 19, 42, 166),
                                     ),),
+                                    SizedBox(height: 8,),
                                     Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -368,29 +377,36 @@ class _PembayaranPageState extends State<PembayaranPage> {
                                   color: Color.fromARGB(200, 19, 42, 166),
                                   ),
                                 ),
+                                SizedBox(height: 8,),
                                 Text(formatCurrency(total),
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),),
                                 SizedBox(height: 20),
-                                SizedBox(
-                                  height: 36,
-                                  child: ElevatedButton(
-                                    onPressed: _pickImage,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          const Color.fromARGB(255, 252, 252, 252),
-                                      foregroundColor: Color.fromARGB(255, 39, 39, 39),
-                                      elevation: 0,
-                                    ),
-                                    child: Text(
-                                      'Upload Bukti Transfer',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        letterSpacing: 0,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      height: 36,
+                                      child: ElevatedButton(
+                                        onPressed: _pickImage,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color.fromARGB(255, 240, 240, 240),
+                                          foregroundColor: Color.fromARGB(255, 39, 39, 39),
+                                          elevation: 0,
+                                        ),
+                                        child: Text(
+                                          'Upload Bukti Transfer',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            letterSpacing: 0,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    uploadedText,
+                                  ],
                                 ),
                               ]  
                             ),

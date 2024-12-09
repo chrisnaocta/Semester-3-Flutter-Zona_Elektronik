@@ -221,13 +221,15 @@ class _PesanPageState extends State<PesanPage> {
                                     style: TextStyle(
                                       color: Color.fromARGB(220, 19, 42, 166),
                                     ),),
+                                    SizedBox(height: 8,),
                                     Text(userName + " | " + userTelepon,
                                     style: TextStyle(
                                       fontSize: 16,
                                     ),),
+                                    SizedBox(height: 4,),
                                     Text(userAlamat,
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                     ),),
                                   ],
                                 ),
@@ -249,6 +251,7 @@ class _PesanPageState extends State<PesanPage> {
                                       style: TextStyle(
                                       color: Color.fromARGB(200, 19, 42, 166),
                                     ),),
+                                    SizedBox(height: 8,),
                                     Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -269,7 +272,7 @@ class _PesanPageState extends State<PesanPage> {
                                                   );
                                                 },
                                               ),
-                                              SizedBox(height: 4,),
+                                              SizedBox(height: 12,),
                                               Text(widget.productName, 
                                                     style: TextStyle(
                                                       fontSize: 16,
@@ -285,13 +288,14 @@ class _PesanPageState extends State<PesanPage> {
                                           crossAxisAlignment: CrossAxisAlignment.end,
                                           children: [
                                             Text("Jumlah"),
+                                            SizedBox(height: 4,),
                                             SizedBox(
                                               width: 50,
                                               height: 30,
                                               child: TextField(
                                                 textAlign: TextAlign.right,
                                                 style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 18,
                                                 ),
                                                 keyboardType: TextInputType.number,
                                                 inputFormatters: <TextInputFormatter>[
