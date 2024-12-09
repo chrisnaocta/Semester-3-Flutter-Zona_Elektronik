@@ -56,7 +56,8 @@ if ($result) {
         $id_user = $user['id_user'];
 
         // Query untuk mengambil data pesanan pengguna
-        $query = "SELECT * FROM jual WHERE (id_pembeli = '$id_user' AND order_status = 'Waiting')";
+        $query = "SELECT j.idjual, j.tgljual, j.bukti_trf, j.idproduct, j.price, j.quantity, j.id_pembeli, j.email, j.nama, j.alamat, j.telepon, j.order_status, p.product 
+        FROM jual j INNER JOIN namaproduct p ON j.idproduct = p.idproduct WHERE (id_pembeli = '$id_user' AND order_status = 'Waiting')";
         $result = mysqli_query($connect, $query);
 
         $pesanan = array();
