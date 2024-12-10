@@ -265,211 +265,213 @@ class _PembayaranPageState extends State<PembayaranPage> {
                 ),
               ),
             ),
-            Container(
-              height: screenHeight-140,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Pesanan",
-                                      style: TextStyle(
-                                      color: Color.fromARGB(200, 19, 42, 166),
-                                    ),),
-                                    SizedBox(height: 8,),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: screenWidth-106,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Image.network(widget.productImage,
-                                              width: 80,
-                                              height: 80,
-                                              fit: BoxFit.contain,
-                                                  errorBuilder: (context, error, stackTrace) {
-                                                  return Icon(
-                                                    Icons.error,
-                                                    size: 50,
-                                                    color: Colors.red,
-                                                  );
-                                                },
-                                              ),
-                                              SizedBox(height: 4,),
-                                              Text(widget.productName, 
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                    ),
+            SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Pesanan",
+                                        style: TextStyle(
+                                        color: Color.fromARGB(200, 19, 42, 166),
+                                      ),),
+                                      SizedBox(height: 8,),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: screenWidth-106,
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Image.network(widget.productImage,
+                                                width: 80,
+                                                height: 80,
+                                                fit: BoxFit.contain,
+                                                    errorBuilder: (context, error, stackTrace) {
+                                                    return Icon(
+                                                      Icons.error,
+                                                      size: 50,
+                                                      color: Colors.red,
+                                                    );
+                                                  },
                                                 ),
-                                              Text(widget.productPrice),
+                                                SizedBox(height: 4,),
+                                                Text(widget.productName, 
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                      ),
+                                                  ),
+                                                Text(widget.productPrice),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                          width: 50,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              Text("Jumlah"),
+                                              SizedBox(
+                                                width: 50,
+                                                height: 30,
+                                                child: TextField(
+                                                  enabled: false,
+                                                  textAlign: TextAlign.right,
+                                                  style: TextStyle(
+                                                    color: const Color.fromARGB(255, 90, 90, 90),
+                                                    fontSize: 16,
+                                                  ),
+                                                  keyboardType: TextInputType.number,
+                                                  inputFormatters: <TextInputFormatter>[
+                                                      FilteringTextInputFormatter.digitsOnly
+                                                      ], // Only numbers can be entered
+                                                  controller: _quantityController,
+                                                  decoration: InputDecoration(
+                                                    border: OutlineInputBorder(
+                                                      borderSide: BorderSide(width: 1, color: const Color.fromARGB(255, 31, 31, 31)),
+                                                    ),
+                                                    contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
-                                        ),
-                                        Container(
-                                        width: 50,
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Text("Jumlah"),
-                                            SizedBox(
-                                              width: 50,
-                                              height: 30,
-                                              child: TextField(
-                                                enabled: false,
-                                                textAlign: TextAlign.right,
-                                                style: TextStyle(
-                                                  color: const Color.fromARGB(255, 90, 90, 90),
-                                                  fontSize: 16,
-                                                ),
-                                                keyboardType: TextInputType.number,
-                                                inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter.digitsOnly
-                                                    ], // Only numbers can be entered
-                                                controller: _quantityController,
-                                                decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide(width: 1, color: const Color.fromARGB(255, 31, 31, 31)),
-                                                  ),
-                                                  contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                      ],
-                                    ),
-                                  ]  
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 8,),
-                        Container(
-                          color: Color.fromARGB(220, 19, 42, 166),
-                          height: 4,
-                        ),
-                        Container(
-                          color: Colors.white,
-                          width: screenWidth,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 24),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Total",
-                                  style: TextStyle(
-                                  color: Color.fromARGB(200, 19, 42, 166),
-                                  ),
-                                ),
-                                SizedBox(height: 8,),
-                                Text(formatCurrency(total),
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),),
-                              ]  
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: Color.fromARGB(220, 230, 230, 230),
-                          height: 4,
-                        ),
-                        Container(
-                          width: screenWidth,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 12, left: 20, right: 20, bottom: 24),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 8,),
-                                Text("Mohon cantumkan email anda pada pesan transfer."),
-                                SizedBox(height: 8,),
-                                Text(
-                                  "BCA\nXXXXXXXXXX\nA.N ZONA ELEKTRONIK",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                SizedBox(height: 16),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: 36,
-                                      child: ElevatedButton(
-                                        onPressed: _pickImage,
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color.fromARGB(255, 240, 240, 240),
-                                          foregroundColor: Color.fromARGB(255, 39, 39, 39),
-                                          elevation: 0,
-                                        ),
-                                        child: Text(
-                                          'Upload Bukti Transfer',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            letterSpacing: 0,
-                                          ),
-                                        ),
+                                        )
+                                        ],
                                       ),
-                                    ),
-                                    uploadedText,
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12, left: 20, right: 20, bottom: 24),
-                          child: 
-                            Text(
-                              "Pastikan semua data sudah benar sebelum melakukan pembayaran. Apabila ada kekeliruan pada nominal transfer, jumlah seluruhnya akan dikembalikan ke rekening Anda setelah pesanan melewati review. Kekeliruan apapun dalam rekening yang dituju tidak ditanggung oleh Zona Elektronik. Hubungi customer service kami pada 08XXXXXXXXXX bila butuh bantuan."
-                            ),
-                        )
-                      ],
-                    ),
-                  ),
-                  
-                  Container(
-                    child: 
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: screenWidth - 80,
-                            child: ElevatedButton(
-                              onPressed: () {_Order(context);},
-                              child: Text('Buat Pesanan'),
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(double.infinity, 36),
-                                backgroundColor: Color.fromARGB(255, 4, 28, 162),
-                                foregroundColor: Colors.white,
+                                    ]  
+                                  ),
+                                ],
                               ),
                             ),
                           ),
+                          SizedBox(height: 8,),
+                          Container(
+                            color: Color.fromARGB(220, 19, 42, 166),
+                            height: 4,
+                          ),
+                          Container(
+                            color: Colors.white,
+                            width: screenWidth,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 24),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Total",
+                                    style: TextStyle(
+                                    color: Color.fromARGB(200, 19, 42, 166),
+                                    ),
+                                  ),
+                                  SizedBox(height: 8,),
+                                  Text(formatCurrency(total),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),),
+                                ]  
+                              ),
+                            ),
+                          ),
+                          Container(
+                            color: Color.fromARGB(220, 230, 230, 230),
+                            height: 4,
+                          ),
+                          Container(
+                            width: screenWidth,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 12, left: 20, right: 20, bottom: 24),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 8,),
+                                  Text("Mohon cantumkan email anda pada pesan transfer."),
+                                  SizedBox(height: 8,),
+                                  Text(
+                                    "BCA\nXXXXXXXXXX\nA.N ZONA ELEKTRONIK",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                  SizedBox(height: 16),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        height: 36,
+                                        child: ElevatedButton(
+                                          onPressed: _pickImage,
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(255, 240, 240, 240),
+                                            foregroundColor: Color.fromARGB(255, 39, 39, 39),
+                                            elevation: 0,
+                                          ),
+                                          child: Text(
+                                            'Upload Bukti Transfer',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              letterSpacing: 0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      uploadedText,
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12, left: 20, right: 20, bottom: 24),
+                            child: 
+                              Text(
+                                "Pastikan semua data sudah benar sebelum melakukan pembayaran. Apabila ada kekeliruan pada nominal transfer, jumlah seluruhnya akan dikembalikan ke rekening Anda setelah pesanan melewati review. Kekeliruan apapun dalam rekening yang dituju tidak ditanggung oleh Zona Elektronik. Hubungi customer service kami pada 08XXXXXXXXXX bila butuh bantuan."
+                              ),
+                          )
                         ],
                       ),
-                  ),
-                ],
+                    ),
+                    SizedBox(height: 20,),
+                    Container(
+                      child: 
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: screenWidth - 80,
+                              child: ElevatedButton(
+                                onPressed: () {_Order(context);},
+                                child: Text('Buat Pesanan'),
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(double.infinity, 36),
+                                  backgroundColor: Color.fromARGB(255, 4, 28, 162),
+                                  foregroundColor: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                    ),
+                    SizedBox(height: 20,),
+                  ],
+                ),
               ),
             ),
           ]

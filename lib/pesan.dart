@@ -180,170 +180,173 @@ class _PesanPageState extends State<PesanPage> {
                 ),
               ),
             ),
-            Container(
-              height: screenHeight-140,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Text("Make sure that your order information is correct",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color.fromARGB(230, 19, 42, 166),
-                            ),),
+            SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text("Make sure that your order information is correct",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(230, 19, 42, 166),
+                              ),),
+                            ),
                           ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          width: screenWidth,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                color: Color.fromARGB(220, 19, 42, 166),
-                                height: 4,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 24),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Alamat",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(220, 19, 42, 166),
-                                    ),),
-                                    SizedBox(height: 8,),
-                                    Text(userName + " | " + userTelepon,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),),
-                                    SizedBox(height: 4,),
-                                    Text(userAlamat,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 8,),
-                        Container(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Row(
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            width: screenWidth,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Pesanan",
+                                Container(
+                                  color: Color.fromARGB(220, 19, 42, 166),
+                                  height: 4,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 24),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Alamat",
                                       style: TextStyle(
-                                      color: Color.fromARGB(200, 19, 42, 166),
-                                    ),),
-                                    SizedBox(height: 8,),
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: screenWidth-106,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Image.network(widget.productImage,
-                                              width: 80,
-                                              height: 80,
-                                              fit: BoxFit.contain,
-                                                  errorBuilder: (context, error, stackTrace) {
-                                                  return Icon(
-                                                    Icons.error,
-                                                    size: 50,
-                                                    color: Colors.red,
-                                                  );
-                                                },
-                                              ),
-                                              SizedBox(height: 12,),
-                                              Text(widget.productName, 
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                    ),
-                                                ),
-                                              Text(widget.productPrice),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                        width: 50,
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Text("Jumlah"),
-                                            SizedBox(height: 4,),
-                                            SizedBox(
-                                              width: 50,
-                                              height: 30,
-                                              child: TextField(
-                                                textAlign: TextAlign.right,
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                ),
-                                                keyboardType: TextInputType.number,
-                                                inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter.digitsOnly
-                                                    ], // Only numbers can be entered
-                                                controller: _quantityController,
-                                                decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide(width: 1),
-                                                  ),
-                                                  contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                      ],
-                                    ),
-                                  ]  
+                                        color: Color.fromARGB(220, 19, 42, 166),
+                                      ),),
+                                      SizedBox(height: 8,),
+                                      Text(userName + " | " + userTelepon,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),),
+                                      SizedBox(height: 4,),
+                                      Text(userAlamat,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: 
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: screenWidth - 80,
-                            child: ElevatedButton(
-                              onPressed: () {_order(context);},
-                              child: Text('Next'),
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(double.infinity, 36),
-                                backgroundColor: Color.fromARGB(255, 4, 28, 162),
-                                foregroundColor: Colors.white,
+                          SizedBox(height: 8,),
+                          Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Pesanan",
+                                        style: TextStyle(
+                                        color: Color.fromARGB(200, 19, 42, 166),
+                                      ),),
+                                      SizedBox(height: 8,),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: screenWidth-106,
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Image.network(widget.productImage,
+                                                width: 80,
+                                                height: 80,
+                                                fit: BoxFit.contain,
+                                                    errorBuilder: (context, error, stackTrace) {
+                                                    return Icon(
+                                                      Icons.error,
+                                                      size: 50,
+                                                      color: Colors.red,
+                                                    );
+                                                  },
+                                                ),
+                                                SizedBox(height: 12,),
+                                                Text(widget.productName, 
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                      ),
+                                                  ),
+                                                Text(widget.productPrice),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                          width: 50,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              Text("Jumlah"),
+                                              SizedBox(height: 4,),
+                                              SizedBox(
+                                                width: 50,
+                                                height: 30,
+                                                child: TextField(
+                                                  textAlign: TextAlign.right,
+                                                  style: TextStyle(
+                                                    fontSize: 18,
+                                                  ),
+                                                  keyboardType: TextInputType.number,
+                                                  inputFormatters: <TextInputFormatter>[
+                                                      FilteringTextInputFormatter.digitsOnly
+                                                      ], // Only numbers can be entered
+                                                  controller: _quantityController,
+                                                  decoration: InputDecoration(
+                                                    border: OutlineInputBorder(
+                                                      borderSide: BorderSide(width: 1),
+                                                    ),
+                                                    contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                        ],
+                                      ),
+                                    ]  
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ],
                       ),
-                  ),
-                ],
+                    ),
+                    SizedBox(height: 40,),
+                    Container(
+                      child: 
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: screenWidth - 80,
+                              child: ElevatedButton(
+                                onPressed: () {_order(context);},
+                                child: Text('Next'),
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(double.infinity, 36),
+                                  backgroundColor: Color.fromARGB(255, 4, 28, 162),
+                                  foregroundColor: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                    ),
+                    SizedBox(height: 20,),
+                  ],
+                ),
               ),
             ),
           ]
