@@ -71,7 +71,6 @@ class _RiwayatPageState extends State<RiwayatPage> {
   void initState() {
     super.initState();
     fetchPesanan(); // Panggil fungsi untuk mengambil data saat widget diinisialisasi
-    fetchProducts();
     fetchUserProfile(); // Panggil fungsi untuk mengambil profil pengguna
   }
 
@@ -128,34 +127,6 @@ class _RiwayatPageState extends State<RiwayatPage> {
       });
     }
   }
-
-   // Fungsi untuk mengambil data produk dari API
-  Future<void> fetchProducts() async {
-    try {
-      final response = await http.get(
-        Uri.parse(
-            'http://10.0.2.2/Zona_Elektronik/get_products.php'), // Ganti dengan URL API Anda
-      );
-
-      if (response.statusCode == 200) {
-        setState(() {
-          products = json.decode(response.body);
-          for(var i=0;i<products.length;i++){
-            String key = products[i]["idproduct"];
-            String value = products[i]["image"];
-            productImages[key] = value;
-          }
-        }
-        );
-      } else {
-        throw Exception('Failed to load products');
-      }
-    } catch (e) {
-      setState(() {
-        errorMessage = e.toString(); // Simpan pesan error
-      });
-    }
-  }
   
 
   //Function logout
@@ -180,10 +151,6 @@ class _RiwayatPageState extends State<RiwayatPage> {
         SnackBar(content: Text('Gagal logout: ${e.toString()}')),
       );
     }
-  }
-
-  String? getImage(String id) {
-    return productImages[id];
   }
 
   // Fungsi untuk memformat harga
@@ -249,7 +216,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                             itemCount: pesanan.length,
                             itemBuilder: (context, index) {
                               final itempesanan = pesanan[index];
-                              final String img = productImages[itempesanan["idproduct"]]!;
+                              final String img = itempesanan["image"];
                               final harga = itempesanan['quantity'] +" x " + formatCurrency(itempesanan['price']);
                               final total = formatTotal(itempesanan['price'], itempesanan['quantity']);
                               var status = itempesanan["order_status"];

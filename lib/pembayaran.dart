@@ -234,7 +234,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
     var uploadedText = Text("");
 
     if (uploaded) {
-      uploadedText = Text("Uploaded");
+      uploadedText = Text("Uploaded ", style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 19, 42, 166)),);
     }
 
     return Scaffold(
@@ -382,7 +382,34 @@ class _PembayaranPageState extends State<PembayaranPage> {
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),),
-                                SizedBox(height: 20),
+                              ]  
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: Color.fromARGB(220, 230, 230, 230),
+                          height: 4,
+                        ),
+                        Container(
+                          width: screenWidth,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 12, left: 20, right: 20, bottom: 24),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 8,),
+                                Text("Mohon cantumkan email anda pada pesan transfer."),
+                                SizedBox(height: 8,),
+                                Text(
+                                  "BCA\nXXXXXXXXXX\nA.N ZONA ELEKTRONIK",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(height: 16),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -408,13 +435,21 @@ class _PembayaranPageState extends State<PembayaranPage> {
                                     uploadedText,
                                   ],
                                 ),
-                              ]  
+                              ],
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12, left: 20, right: 20, bottom: 24),
+                          child: 
+                            Text(
+                              "Pastikan semua data sudah benar sebelum melakukan pembayaran. Apabila ada kekeliruan pada nominal transfer, jumlah seluruhnya akan dikembalikan ke rekening Anda setelah pesanan melewati review. Kekeliruan apapun dalam rekening yang dituju tidak ditanggung oleh Zona Elektronik. Hubungi customer service kami pada 08XXXXXXXXXX bila butuh bantuan."
+                            ),
+                        )
                       ],
                     ),
                   ),
+                  
                   Container(
                     child: 
                       Column(

@@ -49,7 +49,7 @@ class _PesananPageState extends State<PesananPage> {
           
           setState(() {
             pesanan = responseData['data'];
-            if (pesanan.length > 0) {
+            if (pesanan.isNotEmpty) {
               empty = false; 
             }
             isLoading =
@@ -71,7 +71,6 @@ class _PesananPageState extends State<PesananPage> {
   void initState() {
     super.initState();
     fetchPesanan(); // Panggil fungsi untuk mengambil data saat widget diinisialisasi
-    fetchProducts();
     fetchUserProfile(); // Panggil fungsi untuk mengambil profil pengguna
   }
 
@@ -129,35 +128,6 @@ class _PesananPageState extends State<PesananPage> {
     }
   }
 
-   // Fungsi untuk mengambil data produk dari API
-  Future<void> fetchProducts() async {
-    try {
-      final response = await http.get(
-        Uri.parse(
-            'http://10.0.2.2/Zona_Elektronik/get_products.php'), // Ganti dengan URL API Anda
-      );
-
-      if (response.statusCode == 200) {
-        setState(() {
-          products = json.decode(response.body);
-          for(var i=0;i<products.length;i++){
-            String key = products[i]["idproduct"];
-            String value = products[i]["image"];
-            productImages[key] = value;
-          }
-        }
-        );
-      } else {
-        throw Exception('Failed to load products');
-      }
-    } catch (e) {
-      setState(() {
-        errorMessage = e.toString(); // Simpan pesan error
-      });
-    }
-  }
-  
-
   //Function logout
   Future<void> _logout() async {
     try {
@@ -180,10 +150,6 @@ class _PesananPageState extends State<PesananPage> {
         SnackBar(content: Text('Gagal logout: ${e.toString()}')),
       );
     }
-  }
-
-  String? getImage(String id) {
-    return productImages[id];
   }
 
   // Fungsi untuk memformat harga
@@ -232,6 +198,15 @@ class _PesananPageState extends State<PesananPage> {
       page = Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 12),
+                child: Text(
+                  "Mohon tunggu sampai sekitar 1-3 hari setelah pesanan ditambahkan",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                  ),
+              ),
               Expanded(
                 child: isLoading
                     ? Center(child: CircularProgressIndicator())
@@ -249,7 +224,7 @@ class _PesananPageState extends State<PesananPage> {
                             itemCount: pesanan.length,
                             itemBuilder: (context, index) {
                               final itempesanan = pesanan[index];
-                              final String img = productImages[itempesanan["idproduct"]]!;
+                              final img = itempesanan["image"];
                               final harga = itempesanan['quantity'] +" x " + formatCurrency(itempesanan['price']);
                               final total = formatTotal(itempesanan['price'], itempesanan['quantity']); 
 
@@ -327,10 +302,11 @@ class _PesananPageState extends State<PesananPage> {
                                             height: 36,
                                             width: 88,
                                             child: ElevatedButton(
-                                              onPressed: (){}, 
+                                              onPressed: (){
+                                              }, 
                                               child: Text("View info"),
                                               style: ButtonStyle(
-                                                backgroundColor: WidgetStatePropertyAll(const Color.fromARGB(255, 238, 238, 238)),
+                                                backgroundColor: WidgetStatePropertyAll(const Color.fromARGB(255, 245, 245, 245)),
                                                 foregroundColor: WidgetStatePropertyAll(Color.fromARGB(255, 19, 42, 166)),
                                                 shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
                                                 padding: WidgetStatePropertyAll(EdgeInsets.all(4)),
